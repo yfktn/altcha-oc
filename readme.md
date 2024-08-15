@@ -1,7 +1,12 @@
 
-# Altcha
+# Altcha OctoberCMS Plugin
 
-This is the implementation of [Altcha](https://altcha.org/) for OctoberCMS, provided as a plugin that you can use in your project.
+This is the implementation of [Altcha](https://altcha.org/) for OctoberCMS, provided as a plugin that you can use in your project. 
+
+As stated on the main website, Altcha is a free, open source Captcha alternative. ALTCHA uses a proof-of-work mechanism to protect your website, APIs, and online services from spam and unwanted content.
+
+![Altcha In Action](in-action.png)
+
 
 ## Installation
 
@@ -56,3 +61,7 @@ if($enableCaptcha) {
    $isRecaptchaFails = $recaptchaValidator->fails();
 }
 ```
+
+## More Documentation
+
+You can access detailed documentation on how to use it on the main website at [altcha.org](https://altcha.org/).
