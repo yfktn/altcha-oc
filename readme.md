@@ -33,7 +33,26 @@ After cloning, you need to run the `october:migrate` command to apply the migrat
 $ cd your_project_root
 $ php artisan october:migrate
 ```
+## How To Use
 
----
+### Add AltchaField Component
 
-Let me know if you need any more adjustments!
+In your form, simply add the AltchaField Component. 
+
+![Add altchafileld component](altchafield-insert.png)
+
+### Use the Validator
+
+In your submit action method, you need to execute AltchaField validator to validate the request.
+
+```php
+$captchaFieldName = post('captcha-field-name');
+$isRecaptchaFails = true;
+if($enableCaptcha) {
+   // Check for spam?
+   $recaptchaValidator = Validator::make(post(), [
+         $captchaFieldName => ['required', new \Yfktn\Altcha\Classes\AltchaValidator($captchaFieldName)],
+   ]); 
+   $isRecaptchaFails = $recaptchaValidator->fails();
+}
+```
