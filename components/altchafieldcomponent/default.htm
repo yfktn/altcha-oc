@@ -1,0 +1,10 @@
+{% set altchaFieldData = __SELF__.altchaFieldData %}
+<altcha-widget
+    name="{{ altchaFieldData.fieldName }}"
+    {% if altchaFieldData.challengeMode == 'url' %}
+        challengeurl="{{ altchaFieldData.challengeUrl }}"
+    {% else %}
+        challengejson={{ altchaFieldData.challengeJson |raw}}
+    {% endif %}
+></altcha-widget>
+<input type="hidden" name="captcha-field-name" value="{{ altchaFieldData.fieldName }}" />

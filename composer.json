@@ -1,0 +1,14 @@
+{
+    "name": "yfktn/altcha-plugin",
+    "type": "october-plugin",
+    "description": "October CMS Altcha Plugins",
+    "require": {
+        "altcha-org/altcha": "~0.1",
+        "composer/installers": "~1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
