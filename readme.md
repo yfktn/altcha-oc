@@ -40,6 +40,25 @@ $ php artisan october:migrate
 ```
 ## How To Use
 
+### Set Env Variables
+
+In your `.env` variable, set the following variables:
+
+```
+# required, secret hmac key ...
+ALTCHA_HMAC_KEY=
+# optional, the maximum random number
+ALTCHA_MAX_NUMBER=100000
+# optional, challenge expired in seconds
+ALTCHA_EXPIRED=30
+```
+
+### Challenge URL
+
+You can choose between using the free API at altha.org API or the built-in URL provided by this plugin.
+
+By default, the url is set to: `https://your.domain.com/yourbackend/yfktn/altcha/challenger/getchallenge`
+
 ### Add AltchaField Component
 
 In your form, simply add the AltchaField Component. 
