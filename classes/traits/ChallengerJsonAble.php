@@ -12,6 +12,7 @@ trait ChallengerJsonAble
         $challengeOptions = new ChallengeOptions([
             'hmacKey' => config('yfktn.altcha::altchaHMACKey'),
             'maxNumber' => config('yfktn.altcha::altchaMaxNumber'),
+            'expires' => \Carbon\Carbon::now()->addSeconds(config('yfktn.altcha::altchaExpired')),
         ]);
 
         try {

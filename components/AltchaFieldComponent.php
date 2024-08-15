@@ -1,5 +1,6 @@
 <?php namespace Yfktn\Altcha\Components;
 
+use Backend;
 use Cms\Classes\ComponentBase;
 use Yfktn\Altcha\Classes\Traits\ChallengerJsonAble;
 
@@ -26,14 +27,41 @@ class AltchaFieldComponent extends ComponentBase
                 'title' => 'Challenge URL API',
                 'description' => 'Your Server Challenge URL API',
                 'type' => 'string',
-                'default' => '#'
+                'default' => Backend::url('yfktn/altcha/challenger/getchallenge')
             ],
+            // 'expire' => [
+            //     'title' => 'Challenge Expiration',
+            //     'description' => 'Challenge Expiration in milliseconds',
+            //     'type' => 'string',
+            //     'default' => 0,  
+            // ],
             'fieldName' => [
                 'title' => 'Altcha Field Name',
                 'description' => 'Name of your altcha field',
                 'type' => 'string',
                 'default' => 'altcha'
             ],
+            'floating' => [
+                'title' => 'Enable the floating UI',
+                'description' => 'Enable the floating UI',
+                'type' => 'dropdown',
+                'placeholder' => 'Select floating UI',
+                'options' => [ 'none' => 'None', 'auto' => 'Auto', 'top' => 'Top', 'bottom' => 'Bottom'],
+                'default' => 'none',
+            ],
+            'hideFooter' => [
+                'title' => 'Hide Footer',
+                'description' => 'Hide the footer (ALTCHA link)',
+                'type' => 'checkbox',
+                'default' => false
+            ],
+            'hideLogo' => [
+                'title' => 'Hide Logo',
+                'description' => 'Hide the Altcha Logo',
+                'type' => 'checkbox',
+                'default' => false
+            ]
+
         ];
     }
 
@@ -48,6 +76,11 @@ class AltchaFieldComponent extends ComponentBase
     public function onRun()
     {
         $this->loadAssets();
+        $this->altchaFieldData['csrfToken'] = csrf_token();
+        // $this->altchaFieldData['expire'] = $this->property('expire', 0);
+        $this->altchaFieldData['floating'] = $this->property('floating', 'none');
+        $this->altchaFieldData['hideFooter'] = $this->property('hideFooter', false);
+        $this->altchaFieldData['hideLogo'] = $this->property('hideLogo', false);
         $this->altchaFieldData['fieldName'] = $this->property('fieldName', 'altcha');
         $this->altchaFieldData['challengeMode'] = 'json';
         if(!empty($this->property('challengeUrl')) && $this->property('challengeUrl') != '#') {
@@ -58,6 +91,5 @@ class AltchaFieldComponent extends ComponentBase
         } else {
             $this->getJsonChallenge($this->altchaFieldData['challengeJson']);
         }
-
     }
 }

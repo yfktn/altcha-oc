@@ -162,7 +162,7 @@ class Altcha
         $verificationData->score = (float)($params['score'] ?? 0);
         $verificationData->time = (int)($params['time'] ?? 0);
         $verificationData->verified = ($params['verified'] ?? 'false') === 'true';
-
+        trace_log($verificationData);
         $now = time();
         $isVerified = $payload->verified && $verificationData->verified &&
             $verificationData->expire > $now &&

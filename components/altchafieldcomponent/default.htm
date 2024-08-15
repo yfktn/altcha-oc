@@ -1,8 +1,23 @@
 {% set altchaFieldData = __SELF__.altchaFieldData %}
 <altcha-widget
     name="{{ altchaFieldData.fieldName }}"
+    {#
+    {% if altchaFieldData.expire > 0 %}
+        expire="{{ altchaFieldData.expire }}"
+        refetchonexpire=true
+    {% endif %}
+    #}
+    {% if altchaFieldData.floating != 'none' %}
+        floating="{{ altchaFieldData.floating }}"
+    {% endif %}
+    {% if altchaFieldData.hideFooter %}
+        hidefooter
+    {% endif %}
+    {% if altchaFieldData.hideLogo %}
+        hidelogo
+    {% endif %}
     {% if altchaFieldData.challengeMode == 'url' %}
-        challengeurl="{{ altchaFieldData.challengeUrl }}"
+        challengeurl="{{ altchaFieldData.challengeUrl }}/?_token={{ altchaFieldData.csrfToken }}"
     {% else %}
         challengejson={{ altchaFieldData.challengeJson |raw}}
     {% endif %}

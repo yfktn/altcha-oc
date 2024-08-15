@@ -11,6 +11,12 @@ trait ChallengerUrlAble
     public function getChallenge()
     {
         $response ='';
+
+        $csrfToken = csrf_token();
+        $csrfRequestToken  = input('_token');
+        if(empty($csrfRequestToken) || $csrfRequestToken != $csrfToken) {
+            return response('Invalid request token', 500);
+        }
         
         if(!$this->getJsonChallenge($response)) {
             return response($response, 500);
